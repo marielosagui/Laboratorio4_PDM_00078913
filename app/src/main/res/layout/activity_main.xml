@@ -1,4 +1,3 @@
-
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     android:id="@+id/main_ll"
@@ -9,7 +8,7 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".activities.MainActivity">
+    tools:context="activities.MainActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -21,7 +20,7 @@
         <EditText
             android:id="@+id/movie_name_et"
             android:layout_width="0dp"
-            android:hint="@string/movie_name_string"
+            android:hint="movie name"
             android:layout_height="wrap_content"
             android:layout_weight="3" />
 

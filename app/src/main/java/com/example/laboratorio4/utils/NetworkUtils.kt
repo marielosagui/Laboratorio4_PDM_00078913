@@ -1,39 +1,69 @@
 package com.example.laboratorio4.utils
 
 import android.net.Uri
-import  java.net.MalformedURLException
+import android.util.Log
+import java.io.IOException
+import java.net.HttpURLConnection
+import java.net.MalformedURLException
 import java.net.URL
-import javax.net.ssl.HttpsURLConnection
+import java.util.*
+
 
 class NetworkUtils {
 
-    val MOVIES_API_URL= "http://www.omdbapi.com/"
-    val TOKEN_API="ec26031e"
+    val MOVIES_API_BASEURL = "http://www.omdbapi.com/"
+    val TOKEN_API = "ec26031e"
 
-
-    fun buildSearchUrl(movieName: String)URL{
-        val builtUri:Uri.parse(MOVIES_API_URL)
-            .buildUpon()
-            .appendQueryParameter("apikey",TOKEN_API)
-            .appendQueryParameter("t",movieName)
-            .build()
+    fun buildtSearchUrl(movieName: String) : URL {
+        val builtUri = Uri.parse(MOVIES_API_BASEURL)
+                .buildUpon()
+                .appendQueryParameter("apikey", TOKEN_API)
+                .appendQueryParameter("t", movieName)
+                .build()
 
         return try {
             URL(builtUri.toString())
-        }catch (e:MalformedURLException){
-            URL("") }
+        }catch (e : MalformedURLException){
+            URL("")
+        }
     }
 
     @Throws(IOException::class)
-    fun getResponseFromHttpUrl(url:URL):String{
-    url urlConnection =url.openConecction() as HttpsURLConnection
-    try{
-        val `in` = urlC0nnection.inputStream
 
-        val
-    }}
+    fun getResponseFromHttpUrl(url: URL):String{
+
+        val urlConnection = url.openConnection() as HttpURLConnection
+
+        try {
+
+            val `in` = urlConnection.inputStream
+
+
+
+            val scanner = Scanner(`in`)
+
+            scanner.useDelimiter("\\A")
+
+
+
+            val hasInput = scanner.hasNext()
+
+            return if(hasInput){
+
+                scanner.next()
+
+            }else{
+
+                ""
+
+            }
+        }finally {
+
+            urlConnection.disconnect()
+
+        }
+    }
 }
-
 
 
 
